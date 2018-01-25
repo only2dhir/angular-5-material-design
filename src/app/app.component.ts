@@ -6,5 +6,18 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'app';
+
+  constructor() {
+  }
+
+  username : string
+  password : string
+
+  login() : void {
+    if(this.username == 'admin' && this.password == 'admin'){
+     alert("Success.")
+    }else {
+      alert("Invalid credentials");
+    }
+  }
 }

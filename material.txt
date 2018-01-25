@@ -1,0 +1,193 @@
+ibstalling angular component
+
+npm install --save @angular/material @angular/cdk
+cdk - component development kit - angular material component, allows to build web component without angular msterial
+npm i -save hammerjs for animations
+
+
+add css to style.css
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+if u don;t want animations - imports: [NoopAnimationsModule],
+
+<p>This tutorial is about creating a sample application using angular 5 material design.The app will have a login page as a landing page and after
+successful login user will be redirected to next page. To design this page we will be using different angular 5 material components such as form controls,
+navigation menu, layout and buttons.</p>
+<h2 classs="Environment Setup with Angular CLI">
+<p>At first, we will be setting up the angular Hero app using angular CLI and then integrate material design with it from scratch. So, following
+are the commands I used to set up the angular 5 Hero app.</p>
+<div class="cd">
+npm install -g @angular/cli
+ng new client
+cd client/
+ng serve
+</div>
+<p>Now we have our Hero application app running on <a href>http://localhost:4200</a>.The CLI version here is 1.6.5 and angular version is 5.2.0.
+Let's start integrating material with it.</p>
+<h2 class="st">Angular 5 Material Design Configuration</h2>
+<p>We will be using angular CLI to integrate material with this Hero application.Here is the <a href="https://material.angular.io/" rel="nofollow">official website</a> for API description of angular 5 material.
+ There are primarily 3 steps to configure material design.Let &apos's do it step by step.</p>
+ <p><b>Step 1 </b>Install angular material and cdk </p>
+ <div class="cd">
+ npm install --save @angular/material @angular/cdk
+
+ </div>
+ <p>Above command will install required dependencies such as @angular/animations, @angular/cdk, @angular/material to get started with material.
+ Here @angular/material installs the actual dependency required for material designing whereas cdk(Component Development Kit) allows to build application without any dependency on material and
+ @angular/animations provides high quality animations effect.</p>
+ <p><b>Step 2 - </b>Install Angular Theme - There are 4 themes available -  deeppurple-amber.css, indigo-pink.css, pink-bluegrey.css and
+ purple-green.css under <span class="ant">node_modules/@angular/material/prebuilt-themes. We will be using indigo-pink theme.Before using it
+ we need to install it in our application. To do so, import the project into your IDE and open style.css under src folder paste the below line.</p>
+ <div class="cd">
+ @import '~@angular/material/prebuilt-themes/indigo-pink.css';
+ </div>
+ <p>Also add following to index.html for fonts support.</p>
+ <div class="cd">
+ <link href="//fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+ </div>
+ <p><b>Step 3 - </b>Material Module Configuration - Here we will be creating a separate module file to define all our material related module
+  in one single .ts file to make the implementation cleaner. So, create a file named material.module.ts file with following lines.</p>
+  <div class="cd">
+  import {NgModule} from "@angular/core";
+  import { CommonModule } from '@angular/common';
+
+  @NgModule({
+    imports: [],
+    exports: [],
+  })
+  export class CustomMaterialModule { }
+
+  </div>
+<p>Now import the same in app.module.ts..</p>
+<b>app.module.ts</b>
+<div class="cd">
+import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
+import { AppComponent } from './app.component';
+import {CustomMaterialModule} from "./material.module";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+
+
+@NgModule({
+  declarations: [
+    AppComponent
+  ],
+  imports: [
+    BrowserModule,
+    BrowserAnimationsModule,
+    CustomMaterialModule
+  ],
+  providers: [],
+  bootstrap: [AppComponent]
+})
+export class AppModule { }
+
+</div>
+<p>Till now there won&apos;s be any effect of material in our application but our configuration to get started with material is done. Now,
+we will start creating components using material.</p>
+<h2 class="st">Creating Material Navigation</h2>
+<p>Angular provides 3 navigation options - Menu, Sidenav and Toolbar. We will be creating toolbar here for navigation. To do so, first we need to
+import and export MatToolbarModule in our material.module.ts as follow:</p>
+<div class="cd">
+import { MatButtonModule, MatToolbarModule } from '@angular/material';
+<span class="antb">
+.
+.
+.</span>
+imports: [CommonModule, MatToolbarModule, MatButtonModule],
+exports: [CommonModule, MatToolbarModule, MatButtonModule],
+</div>
+<p>Now we have tool bar module imported, we can create our tool bar which will have company logo on the left side and some buttons on the
+right side.To have material buttons we need buttons module imported which has been imported above. </p>
+<p>Let&apos;s clean up default settings first.Remove all the code from app.component.html and add following</p>
+<div class="cd">
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+    <span><img src="./assets/logo.png"></span>
+    <span class="example-fill-remaining-space"></span>
+    <span class="align-center">Email2SMS</span>
+    <span class="example-spacer"></span>
+
+    <button mat-button>About</button>
+    <button mat-button>Contact</button>
+  </mat-toolbar-row>
+</mat-toolbar>
+
+</div>
+<p>Alao, add following css in app.component.css</p>
+<div class="cd">
+.example-icon {
+  padding: 0 14px;
+}
+
+.example-spacer {
+  flex: 1 1 auto;
+}
+
+</div>
+<p>Once this is done, hit ng serve in the command line and open browser at <a href>localhost:4200</a>. Following is the material toolbar that we  built.</p>
+image 1
+<h2 class="st">Creating Form with Material</h2>
+<p>Now let&apos;s create a login form. For this we require to import MatCardModule and MatInputModule. MatCardModule is a material layout
+ and MatInputModule provides multiple input components.Add following lines in app.component.html</p>
+ <div class="cd">
+ <mat-card class="example-card">
+   <mat-card-header>
+     <mat-card-title>Login</mat-card-title>
+   </mat-card-header>
+   <mat-card-content>
+     <form class="example-form">
+       <table class="example-full-width" cellspacing="0">
+         <tr>
+           <td>
+             <mat-form-field class="example-full-width">
+             <input matInput placeholder="Username" [(ngModel)]="username" name="username" required>
+             </mat-form-field>
+           </td>
+         </tr>
+         <tr>
+         <td><mat-form-field class="example-full-width">
+           <input matInput placeholder="Password" [(ngModel)]="password" type="password" name="password" required>
+         </mat-form-field></td>
+       </tr></table>
+     </form>
+     <mat-spinner [style.display]="showSpinner ? 'block' : 'none'"></mat-spinner>
+   </mat-card-content>
+   <mat-card-actions>
+     <button mat-raised-button (click)="login()" color="primary">Login</button>
+   </mat-card-actions>
+ </mat-card>
+
+ </div>
+<p>In the above code we have a layout having two form fields for username and password bind with our model attributes and a button. Once this button
+is clicked <code>login()</code> will be called to validate the user.</p><p>Once you add above code, you will find error as <span class="ant">
+Can&apos;t bind ngModel since it isn&apos;t a known property of input because we don&apos;t have formsModule imported. Hence let&apos;s import it in
+<code>app.module.ts</code>.Also, make following changes in <code>app.component.ts</code> to define the variable username, password and <code>login()</code> </p>
+<div class="cd">
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
+})
+export class AppComponent {
+
+  constructor() {
+  }
+
+  username : string
+  password : string
+
+  login() : void {
+    if(this.username == 'admin' && this.password == 'admin'){
+     alert("Success.")
+    }else {
+      alert("Invalid credentials");
+    }
+  }
+}
+
+</div>
+<p>Now open the browser, you can see a beautiful login page as below:</p>
+image 2
+
