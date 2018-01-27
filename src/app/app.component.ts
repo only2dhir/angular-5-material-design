@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-root',
@@ -10,14 +11,4 @@ export class AppComponent {
   constructor() {
   }
 
-  username : string
-  password : string
-
-  login() : void {
-    if(this.username == 'admin' && this.password == 'admin'){
-     alert("Success.")
-    }else {
-      alert("Invalid credentials");
-    }
-  }
 }
