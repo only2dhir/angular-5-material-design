@@ -7,12 +7,14 @@ import {FormsModule} from "@angular/forms";
 import { UserComponent } from './user/user.component';
 import {AppRoutingModule} from "./core/app.routing.module";
 import { LoginComponent } from './login/login.component';
+import {ErrorDialogComponent} from "./core/error-dialog.component";
 
 @NgModule({
   declarations: [
     AppComponent,
     UserComponent,
-    LoginComponent
+    LoginComponent,
+    ErrorDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -21,7 +23,8 @@ import { LoginComponent } from './login/login.component';
     FormsModule,
     AppRoutingModule
   ],
-  providers: [],
+  entryComponents: [ErrorDialogComponent],
+  providers: [ErrorDialogComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
